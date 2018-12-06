@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<?php
+/* Database connection settings */
+$hostname = 'localhost';
+$username = 'Kimonjo_E';
+$password = 'Headgate@1';
+$db = 'Registration';
+$mysqli = new mysqli($hostname,$username,$password,$db) or die($mysqli->error);
+/create the database
+if ( !$mysqli->query('CREATE DATABASE Registration') ) {
+    printf("Errormessage: %s\n", $mysqli->error);
+}
+
+//create users table with all the fields
+$mysqli->query('
+CREATE TABLE `accounts`.`users` 
+(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `first_name` VARCHAR(50) NOT NULL,
+     `last_name` VARCHAR(50) NOT NULL,
+     ID_number   INT(100) NOT NULL,
+     
+
+    `email` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    `hash` VARCHAR(32) NOT NULL,
+    `active` BOOL NOT NULL DEFAULT 0,
+PRIMARY KEY (`id`) 
+);') or die($mysqli->error);
+
+?>
+<html>
+<head>
+  <title>::Easy Clean Carwash:</title>
+  <link rel="stylesheet" type="text/css" href="sign up.css">
+</head>
+<body bgcolor="lawngreen">
+<form action="sign_up.php" method="post" style="border:1px solid #ccc">
+  <div class="container">
+    <h1>Register Here</h1>
+    <p>Please Enter your details to create an account.</p>
+    <hr>
+    <label for="First Name"><b>First Name</b></label><br>
+    <input type="text" placeholder="Your First Name" name="First Name" required><br>
+    <label for="Last Name"><b>Last Name</b></label><br>
+    <input type="text" placeholder="Your Last Name" name="Last Name" required><br>
+    <label for="ID Number"><b>Id Number</b></label><br>
+    <input type="text" placeholder="Your ID Number" name="ID Number" required><br>
+    <label for="Phone Number"><b>Phone Number</b></label><br>
+    <input type="text" placeholder="Your Phone Number" name="Phone Number" required><br>
+    
+    
+    <label for="email"><b>Email</b></label><br>
+    <input type="email" placeholder="Enter Email" name="email" required><br>
+    <label for="psw"><b>Password</b></label><br>
+    <input type="password" placeholder="Enter Password" name="psw" required><br>
+    <label for="psw-repeat"><b>Confirm your Password</b></label><br>
+    <input type="password" placeholder="Retype Your Password" name="psw-repeat" required><br>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    </label>
+
+    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>
